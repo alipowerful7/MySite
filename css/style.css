@@ -60,7 +60,8 @@ body {
     background: linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%);
     border-radius: 1.5rem;
     box-shadow: 0 0 32px 8px #a78bfa33, 0 2px 16px #0008;
-    transition: all 0.45s cubic-bezier(.68, -0.55, .27, 1.55);
+    transition: transform 0.45s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.45s, filter 0.45s, background 0.7s;
+    /* نرم شدن بزرگ شدن کارت مهارت */
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -94,6 +95,7 @@ body {
 
 .skill-card:hover {
     transform: scale(1.13) rotate(-3deg) translateY(-10px);
+    /* بزرگ شدن نرم کارت مهارت */
     box-shadow: 0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2;
     filter: brightness(1.18) drop-shadow(0 0 32px #a78bfa);
     background: linear-gradient(120deg, #7c3aed 0%, #312e81 100%);
@@ -108,6 +110,12 @@ body {
 
 .skill-card .skill-icon {
     font-size: 4rem !important;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1.1rem;
     filter: drop-shadow(0 0 16px #a78bfa88);
     transition: transform 0.5s cubic-bezier(.68, -0.55, .27, 1.55), filter 0.4s;

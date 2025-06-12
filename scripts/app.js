@@ -42,6 +42,12 @@ const skills = [
     { name: 'Sql Server', icon: 'fa-solid fa-database', color: '#FFD700' },
     { name: 'Postgresql', icon: 'fa-solid fa-database', color: '#336791' },
 ];
+const skillIcons = {
+    'C#': 'c-sharp-c.svg',
+    'Postman': 'postman.svg',
+    'Sql Server': 'file-type-sql.svg',
+    'Postgresql': 'postgresql.svg',
+};
 const skillsElem = document.getElementById('skills');
 skillsElem.innerHTML = '';
 
@@ -49,15 +55,28 @@ skills.forEach(function (skill, i) {
     var card = document.createElement('div');
     card.className = 'skill-card flex flex-col items-center justify-center';
     card.style.animationDelay = (i * 0.13) + 's';
-    // گرادینت و شیشه‌ای شبیه کارت ارتباط
     card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
     card.style.backdropFilter = 'blur(10px)';
     card.style.borderRadius = '1.5rem';
     card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
     // آیکون
-    var icon = document.createElement('i');
-    icon.className = 'skill-icon ' + skill.icon;
-    icon.style.color = skill.color;
+    var icon;
+    if (skillIcons[skill.name]) {
+        icon = document.createElement('img');
+        icon.src = skillIcons[skill.name];
+        icon.alt = skill.name + ' icon';
+        icon.className = 'skill-icon';
+        icon.style.background = 'none';
+        icon.style.width = '4rem';
+        icon.style.height = '4rem';
+        icon.style.objectFit = 'contain';
+        icon.style.marginBottom = '1.1rem';
+        icon.style.filter = 'drop-shadow(0 0 16px #a78bfa88)';
+    } else {
+        icon = document.createElement('i');
+        icon.className = 'skill-icon ' + skill.icon;
+        icon.style.color = skill.color;
+    }
     card.appendChild(icon);
     // نام مهارت
     var label = document.createElement('span');
@@ -70,7 +89,7 @@ skills.forEach(function (skill, i) {
         card.style.boxShadow = '0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2';
         card.style.transform = 'scale(1.13) rotate(-3deg) translateY(-10px)';
         card.style.filter = 'brightness(1.18) drop-shadow(0 0 32px #a78bfa)';
-        icon.style.transform = 'scale(1.25) rotate(8deg)';
+        icon.style.transform = 'scale(1.13) rotate(8deg)';
         icon.style.filter = 'drop-shadow(0 0 32px #fff) brightness(1.3)';
         label.style.color = '#fff';
         label.style.textShadow = '0 2px 16px #a78bfa, 0 0 8px #fff';
@@ -81,7 +100,7 @@ skills.forEach(function (skill, i) {
         card.style.transform = '';
         card.style.filter = '';
         icon.style.transform = '';
-        icon.style.filter = '';
+        icon.style.filter = 'drop-shadow(0 0 16px #a78bfa88)';
         label.style.color = '';
         label.style.textShadow = '';
     });
