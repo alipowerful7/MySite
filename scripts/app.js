@@ -109,34 +109,32 @@ skills.forEach(function (skill, i) {
 
 // ستاره‌های پس‌زمینه کهکشانی متحرک با حرکت بسیار نرم و روان و بدون لگ
 let lastStarFrame = 0;
+let starAnimationFrameId = null;
+let galaxyStars = [];
 function animateStars(now) {
     if (!lastStarFrame) lastStarFrame = now;
-    var delta = (now - lastStarFrame) / 1000; // ثانیه
+    var delta = (now - lastStarFrame) / 1000;
     lastStarFrame = now;
-    var stars = document.querySelectorAll('.star');
-    stars.forEach(function (star, i) {
-        // سرعت هر ستاره ثابت و بسیار کم برای روانی بیشتر
-        var baseSpeed = 0.08 + (i % 7) * 0.12; // درجه بر ثانیه
-        var angle = parseFloat(star.getAttribute('data-angle')) || Math.random() * 360;
+    for (let i = 0; i < galaxyStars.length; i++) {
+        const star = galaxyStars[i];
+        var baseSpeed = 0.08 + (i % 7) * 0.12;
+        var angle = star.angle;
         angle += baseSpeed * delta;
         if (angle > 360) angle -= 360;
-        var radius = parseFloat(star.getAttribute('data-radius')) || (Math.random() * 40 + 10);
-        var cx = parseFloat(star.getAttribute('data-cx')) || (Math.random() * 100);
-        var cy = parseFloat(star.getAttribute('data-cy')) || (Math.random() * 100);
+        var radius = star.radius;
+        var cx = star.cx;
+        var cy = star.cy;
         var x = cx + Math.cos(angle * Math.PI / 180) * radius;
         var y = cy + Math.sin(angle * Math.PI / 180) * radius;
-        star.style.left = (x % 100) + '%';
-        star.style.top = (y % 100) + '%';
-        star.setAttribute('data-angle', angle);
-        star.setAttribute('data-radius', radius);
-        star.setAttribute('data-cx', cx);
-        star.setAttribute('data-cy', cy);
-    });
-    requestAnimationFrame(animateStars);
+        star.el.style.left = (x % 100) + '%';
+        star.el.style.top = (y % 100) + '%';
+        star.angle = angle;
+    }
+    starAnimationFrameId = requestAnimationFrame(animateStars);
 }
-
 function createStars(num) {
     var galaxy = document.getElementById('galaxy-bg');
+    galaxyStars = [];
     for (var i = 0; i < num; i++) {
         var star = document.createElement('div');
         star.className = 'star';
@@ -153,15 +151,14 @@ function createStars(num) {
         star.style.top = (y % 100) + '%';
         star.style.opacity = (Math.random() * 0.7 + 0.3);
         star.style.boxShadow = '0 0 ' + (Math.random() * 12 + 4) + 'px ' + (Math.random() * 2) + 'px #fff8';
-        star.setAttribute('data-angle', angle);
-        star.setAttribute('data-radius', radius);
-        star.setAttribute('data-cx', cx);
-        star.setAttribute('data-cy', cy);
         galaxy.appendChild(star);
+        galaxyStars.push({el: star, angle, radius, cx, cy});
     }
 }
-createStars(120);
-requestAnimationFrame(animateStars);
+// تعداد ستاره‌ها را کاهش می‌دهیم تا سایت سریع‌تر شود
+createStars(50);
+if (starAnimationFrameId) cancelAnimationFrame(starAnimationFrameId);
+starAnimationFrameId = requestAnimationFrame(animateStars);
 
 // کارت‌های ارتباطی
 (function () {

@@ -1,4 +1,8 @@
 /* ...existing code... */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     /* کهکشانی: ستاره‌ها و گردینت بنفش متحرک با تنوع رنگ بیشتر */
     background: linear-gradient(120deg, #6d28d9 0%, #7c3aed 20%, #312e81 40%, #0f172a 60%, #1e293b 80%, #0a0a23 100%);
@@ -324,4 +328,63 @@ body {
     color: #fff;
     text-shadow: 0 2px 12px #a78bfa, 0 0 8px #fff;
     border-radius: 0.5em;
+}
+
+.profile-avatar {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #a78bfa;
+    box-shadow: 0 0 0 8px #7c3aed33, 0 0 32px 8px #a78bfa55, 0 2px 16px #0008;
+    background: linear-gradient(135deg, #a78bfa 0%, #6366f1 100%);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.5s, filter 0.5s;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 0 0 16px #a78bfa99, 0 0 64px 24px #a78bfaee, 0 2px 32px #fff8;
+    filter: brightness(1.15) drop-shadow(0 0 32px #a78bfa);
+}
+
+.avatar-glow {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9.5rem;
+    height: 9.5rem;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #a78bfa88 0%, #7c3aed33 60%, transparent 100%);
+    filter: blur(12px) brightness(1.2);
+    z-index: 1;
+    pointer-events: none;
+    animation: avatarGlowPulse 2.8s infinite alternate cubic-bezier(.77, 0, .18, 1);
+}
+
+@keyframes avatarGlowPulse {
+    0% {
+        filter: blur(12px) brightness(1.1);
+        opacity: 0.7;
+    }
+
+    100% {
+        filter: blur(20px) brightness(1.4);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-avatar {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .avatar-glow {
+        width: 7rem;
+        height: 7rem;
+    }
 }
