@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت شخصی من</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Vazir', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-900 via-indigo-900 to-black relative">
+    <!-- Galaxy background particles -->
+    <div id="galaxy-bg" class="absolute inset-0 -z-10"></div>
+    <main class="w-full max-w-5xl mx-auto text-center text-white px-2">
+        <section class="mt-20 mb-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">سلام! من <span class="text-purple-400">علی خسروجردی</span> هستم</h1>
+            <div class="text-2xl md:text-3xl h-12 flex items-center justify-center">
+                <span id="typewriter"></span>
+                <span class="blinking-cursor">|</span>
+            </div>
+        </section>
+        <section id="about" class="my-16 bg-indigo-900/60 rounded-2xl p-8 shadow-lg backdrop-blur-md">
+            <h2 class="text-3xl font-bold mb-4 text-purple-300">درباره من</h2>
+            <p class="text-lg leading-8">این یک متن تستی درباره من است. من یک برنامه‌نویس بک‌اند با علاقه به تکنولوژی و توسعه نرم‌افزار هستم. عاشق یادگیری و تجربه‌های جدیدم.</p>
+        </section>
+        <section class="my-16">
+            <h2 class="text-3xl font-bold mb-8">مهارت‌ها</h2>
+            <div id="skills" class="flex flex-wrap justify-center gap-8">
+                <!-- Skills will be injected by JS -->
+            </div>
+        </section>
+        <section id="resume" class="my-16">
+            <h2 class="text-3xl font-bold mb-8 text-purple-300">رزومه من</h2>
+            <a href="#" class="resume-download-btn inline-block px-10 py-4 rounded-2xl text-xl font-bold bg-gradient-to-r from-purple-500 via-indigo-500 to-fuchsia-500 text-white shadow-2xl hover:scale-110 hover:shadow-purple-400/60 hover:bg-gradient-to-l transition-all duration-500 ease-out border-0 outline-none focus:ring-4 focus:ring-purple-400/40 animate-pulse">دانلود رزومه من</a>
+        </section>
+        <section id="contact" class="my-20">
+            <h2 class="text-3xl font-bold mb-8 text-purple-300">ارتباط با من</h2>
+            <div id="contact-cards" class="flex flex-wrap justify-center gap-8"></div>
+        </section>
+    </main>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
