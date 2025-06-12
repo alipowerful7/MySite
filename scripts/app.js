@@ -2,9 +2,9 @@
 const typewriterTexts = [
     'برنامه‌نویس بک‌اند',
     'علاقه‌مند به تکنولوژی',
-    'توسعه‌دهنده Node.js',
+    'توسعه‌دهنده Asp.net',
     'عاشق یادگیری',
-    'متن تستی برای تایپ',
+    'علاقه‌مند به حل چالش‌ها',
 ];
 let typeIndex = 0, charIndex = 0, isDeleting = false;
 const typewriterElem = document.getElementById('typewriter');
@@ -32,19 +32,22 @@ typeWriter();
 
 // مهارت‌ها با آیکون و انیمیشن
 const skills = [
-    { name: 'Node.js', icon: 'fa-brands fa-node-js', color: '#68a063' },
-    { name: 'JavaScript', icon: 'fa-brands fa-js', color: '#f7df1e' },
-    { name: 'Python', icon: 'fa-brands fa-python', color: '#3776ab' },
+    { name: 'C#', icon: 'fa-solid fa-code', color: '#9b4f96' },
+    { name: 'Asp.Net', icon: 'fa-brands fa-microsoft', color: '#512bd4' },
     { name: 'Git', icon: 'fa-brands fa-git-alt', color: '#f34f29' },
+    { name: 'Github', icon: 'fa-brands fa-github', color: '#fff' },
+    { name: 'Gitlab', icon: 'fa-brands fa-gitlab', color: '#fc6d26' },
     { name: 'Docker', icon: 'fa-brands fa-docker', color: '#2496ed' },
-    { name: 'PostgreSQL', icon: 'fa-solid fa-database', color: '#336791' },
+    { name: 'Postman', icon: 'fa-solid fa-flask', color: '#ff6c37' },
+    { name: 'Sql Server', icon: 'fa-solid fa-database', color: '#FFD700' }, // طلایی
+    { name: 'Postgresql', icon: 'fa-solid fa-database', color: '#336791' },
     // ...
 ];
 const skillsElem = document.getElementById('skills');
 
-skills.forEach(function(skill, i) {
+skills.forEach(function (skill, i) {
     var card = document.createElement('div');
-    card.className = 'skill-card flex flex-col items-center p-6 w-36 h-36 m-2 pt-10 pb-10';
+    card.className = 'skill-card flex flex-col items-center p-8 w-52 h-52 m-4 pt-10 pb-10';
     card.style.animationDelay = (i * 0.13) + 's';
     var icon = document.createElement('i');
     icon.className = 'skill-icon ' + skill.icon;
@@ -56,11 +59,11 @@ skills.forEach(function(skill, i) {
     card.appendChild(label);
     card.style.opacity = '1';
     // رویدادهای هاور برای افکت جذاب
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         skillsElem.classList.add('skills-hovering');
         card.classList.add('skill-active');
     });
-    card.addEventListener('mouseleave', function() {
+    card.addEventListener('mouseleave', function () {
         skillsElem.classList.remove('skills-hovering');
         card.classList.remove('skill-active');
     });
@@ -74,7 +77,7 @@ function animateStars(now) {
     var delta = (now - lastStarFrame) / 1000; // ثانیه
     lastStarFrame = now;
     var stars = document.querySelectorAll('.star');
-    stars.forEach(function(star, i) {
+    stars.forEach(function (star, i) {
         // سرعت هر ستاره ثابت و بسیار کم برای روانی بیشتر
         var baseSpeed = 0.08 + (i % 7) * 0.12; // درجه بر ثانیه
         var angle = parseFloat(star.getAttribute('data-angle')) || Math.random() * 360;
@@ -112,7 +115,7 @@ function createStars(num) {
         star.style.left = (x % 100) + '%';
         star.style.top = (y % 100) + '%';
         star.style.opacity = (Math.random() * 0.7 + 0.3);
-        star.style.boxShadow = '0 0 ' + (Math.random()*12+4) + 'px ' + (Math.random()*2) + 'px #fff8';
+        star.style.boxShadow = '0 0 ' + (Math.random() * 12 + 4) + 'px ' + (Math.random() * 2) + 'px #fff8';
         star.setAttribute('data-angle', angle);
         star.setAttribute('data-radius', radius);
         star.setAttribute('data-cx', cx);
@@ -124,61 +127,61 @@ createStars(120);
 requestAnimationFrame(animateStars);
 
 // کارت‌های ارتباطی
-(function() {
-  const contactCards = [
-      {
-          label: 'گیت‌هاب',
-          icon: 'fa-brands fa-github',
-          link: 'https://github.com/',
-          text: 'github.com/username',
-          color: '#fff',
-      },
-      {
-          label: 'گیت‌لب',
-          icon: 'fa-brands fa-gitlab',
-          link: 'https://gitlab.com/',
-          text: 'gitlab.com/username',
-          color: '#fc6d26',
-      },
-      {
-          label: 'تلگرام',
-          icon: 'fa-brands fa-telegram',
-          link: 'https://t.me/username',
-          text: '@username',
-          color: '#229ed9',
-      },
-      {
-          label: 'جیمیل',
-          icon: 'fa-solid fa-envelope',
-          link: 'mailto:yourmail@gmail.com',
-          text: 'yourmail@gmail.com',
-          color: '#ea4335',
-      },
-  ];
-  window.addEventListener('DOMContentLoaded', function() {
-    const contactCardsElem = document.getElementById('contact-cards');
-    if (contactCardsElem) {
-      contactCards.forEach(function(card, i) {
-          var el = document.createElement('div');
-          el.className = 'contact-card flex flex-col items-center justify-center';
-          el.style.animationDelay = (i * 0.18) + 's';
-          var icon = document.createElement('i');
-          icon.className = 'contact-icon ' + card.icon;
-          icon.style.color = card.color;
-          el.appendChild(icon);
-          var label = document.createElement('div');
-          label.className = 'contact-label';
-          label.textContent = card.label;
-          el.appendChild(label);
-          var link = document.createElement('a');
-          link.className = 'contact-link';
-          link.href = card.link;
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-          link.textContent = card.text;
-          el.appendChild(link);
-          contactCardsElem.appendChild(el);
-      });
-    }
-  });
+(function () {
+    const contactCards = [
+        {
+            label: 'گیت‌هاب',
+            icon: 'fa-brands fa-github',
+            link: 'https://github.com/alipowerful7',
+            text: 'github.com/alipowerful7',
+            color: '#fff',
+        },
+        {
+            label: 'گیت‌لب',
+            icon: 'fa-brands fa-gitlab',
+            link: 'https://gitlab.com/alipowerful7',
+            text: 'gitlab.com/alipowerful7',
+            color: '#fc6d26',
+        },
+        {
+            label: 'تلگرام',
+            icon: 'fa-brands fa-telegram',
+            link: 'https://t.me/ali_powerful7',
+            text: '@ali_powerful7',
+            color: '#229ed9',
+        },
+        {
+            label: 'جیمیل',
+            icon: 'fa-solid fa-envelope',
+            link: 'https://mail.google.com/mail/?view=cm&fs=1&to=ali7.khosrojerdi@gmail.com',
+            text: 'ali7.khosrojerdi@gmail.com',
+            color: '#ea4335',
+        },
+    ];
+    window.addEventListener('DOMContentLoaded', function () {
+        const contactCardsElem = document.getElementById('contact-cards');
+        if (contactCardsElem) {
+            contactCards.forEach(function (card, i) {
+                var el = document.createElement('div');
+                el.className = 'contact-card flex flex-col items-center justify-center';
+                el.style.animationDelay = (i * 0.18) + 's';
+                var icon = document.createElement('i');
+                icon.className = 'contact-icon ' + card.icon;
+                icon.style.color = card.color;
+                el.appendChild(icon);
+                var label = document.createElement('div');
+                label.className = 'contact-label';
+                label.textContent = card.label;
+                el.appendChild(label);
+                var link = document.createElement('a');
+                link.className = 'contact-link';
+                link.href = card.link;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = card.text;
+                el.appendChild(link);
+                contactCardsElem.appendChild(el);
+            });
+        }
+    });
 })();
