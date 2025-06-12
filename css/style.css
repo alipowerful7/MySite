@@ -173,8 +173,10 @@ body {
     border-radius: 1.5rem;
     box-shadow: 0 0 32px 8px #a78bfa33, 0 2px 16px #0008;
     color: #fff;
-    min-width: 220px;
-    min-height: 120px;
+    width: 17rem;
+    height: 11rem;
+    min-width: unset;
+    min-height: unset;
     padding: 2.2rem 1.5rem 1.2rem 1.5rem;
     display: flex;
     flex-direction: column;
