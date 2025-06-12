@@ -30,7 +30,7 @@ function typeWriter() {
 }
 typeWriter();
 
-// مهارت‌ها با آیکون و انیمیشن
+// مهارت‌ها با آیکون و انیمیشن الهام‌گرفته از کارت‌های ارتباط و دکمه رزومه
 const skills = [
     { name: 'C#', icon: 'fa-solid fa-code', color: '#9b4f96' },
     { name: 'Asp.Net', icon: 'fa-brands fa-microsoft', color: '#512bd4' },
@@ -39,33 +39,51 @@ const skills = [
     { name: 'Gitlab', icon: 'fa-brands fa-gitlab', color: '#fc6d26' },
     { name: 'Docker', icon: 'fa-brands fa-docker', color: '#2496ed' },
     { name: 'Postman', icon: 'fa-solid fa-flask', color: '#ff6c37' },
-    { name: 'Sql Server', icon: 'fa-solid fa-database', color: '#FFD700' }, // طلایی
+    { name: 'Sql Server', icon: 'fa-solid fa-database', color: '#FFD700' },
     { name: 'Postgresql', icon: 'fa-solid fa-database', color: '#336791' },
-    // ...
 ];
 const skillsElem = document.getElementById('skills');
+skillsElem.innerHTML = '';
 
 skills.forEach(function (skill, i) {
     var card = document.createElement('div');
-    card.className = 'skill-card flex flex-col items-center p-8 w-52 h-52 m-4 pt-10 pb-10';
+    card.className = 'skill-card flex flex-col items-center justify-center';
     card.style.animationDelay = (i * 0.13) + 's';
+    // گرادینت و شیشه‌ای شبیه کارت ارتباط
+    card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
+    card.style.backdropFilter = 'blur(10px)';
+    card.style.borderRadius = '1.5rem';
+    card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
+    // آیکون
     var icon = document.createElement('i');
     icon.className = 'skill-icon ' + skill.icon;
     icon.style.color = skill.color;
     card.appendChild(icon);
+    // نام مهارت
     var label = document.createElement('span');
     label.className = 'mt-4 text-xl';
     label.textContent = skill.name;
     card.appendChild(label);
-    card.style.opacity = '1';
-    // رویدادهای هاور برای افکت جذاب
+    // افکت هاور شبیه دکمه رزومه و کارت ارتباط
     card.addEventListener('mouseenter', function () {
-        skillsElem.classList.add('skills-hovering');
-        card.classList.add('skill-active');
+        card.style.background = 'linear-gradient(120deg, #7c3aed 0%, #312e81 100%)';
+        card.style.boxShadow = '0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2';
+        card.style.transform = 'scale(1.13) rotate(-3deg) translateY(-10px)';
+        card.style.filter = 'brightness(1.18) drop-shadow(0 0 32px #a78bfa)';
+        icon.style.transform = 'scale(1.25) rotate(8deg)';
+        icon.style.filter = 'drop-shadow(0 0 32px #fff) brightness(1.3)';
+        label.style.color = '#fff';
+        label.style.textShadow = '0 2px 16px #a78bfa, 0 0 8px #fff';
     });
     card.addEventListener('mouseleave', function () {
-        skillsElem.classList.remove('skills-hovering');
-        card.classList.remove('skill-active');
+        card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
+        card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
+        card.style.transform = '';
+        card.style.filter = '';
+        icon.style.transform = '';
+        icon.style.filter = '';
+        label.style.color = '';
+        label.style.textShadow = '';
     });
     skillsElem.appendChild(card);
 });
