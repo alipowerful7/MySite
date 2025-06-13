@@ -481,25 +481,37 @@ body {
     overflow: visible;
     background: linear-gradient(120deg, #312e81cc 60%, #7c3aedcc 100%);
     border-radius: 2rem;
-    box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
-    animation: contactBoxGlow 3.5s cubic-bezier(.77, 0, .18, 1) infinite alternate;
+    box-shadow: 0 0 48px 8px #a78bfa33, 0 0 0 4px #fff1, 0 8px 24px #0006;
+    animation: contactBoxGlow 14s cubic-bezier(.77, 0, .18, 1) infinite alternate;
     z-index: 2;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
 }
 
 @keyframes contactBoxGlow {
     0% {
-        box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
-        filter: brightness(1.05) drop-shadow(0 0 0px #a78bfa);
+        box-shadow: 0 0 48px 8px #a78bfa33, 0 0 0 4px #fff1, 0 8px 24px #0006;
+        filter: brightness(1.01) drop-shadow(0 0 0px #a78bfa);
+    }
+
+    25% {
+        box-shadow: 0 0 56px 10px #a78bfa3a, 0 0 0 5px #fff1, 0 8px 28px #a78bfa18;
+        filter: brightness(1.03) drop-shadow(0 0 8px #a78bfa);
     }
 
     50% {
-        box-shadow: 0 0 96px 32px #a78bfa99, 0 0 0 16px #fff4, 0 8px 48px #a78bfa44;
-        filter: brightness(1.18) drop-shadow(0 0 32px #a78bfa);
+        box-shadow: 0 0 64px 16px #a78bfa44, 0 0 0 8px #fff2, 0 8px 32px #a78bfa22;
+        filter: brightness(1.07) drop-shadow(0 0 16px #a78bfa);
+    }
+
+    75% {
+        box-shadow: 0 0 56px 10px #a78bfa3a, 0 0 0 5px #fff1, 0 8px 28px #a78bfa18;
+        filter: brightness(1.03) drop-shadow(0 0 8px #a78bfa);
     }
 
     100% {
-        box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
-        filter: brightness(1.05) drop-shadow(0 0 0px #a78bfa);
+        box-shadow: 0 0 48px 8px #a78bfa33, 0 0 0 4px #fff1, 0 8px 24px #0006;
+        filter: brightness(1.01) drop-shadow(0 0 0px #a78bfa);
     }
 }
 
@@ -509,20 +521,20 @@ body {
     inset: -4px;
     border-radius: 2.2rem;
     background: conic-gradient(from 180deg at 50% 50%, #a78bfa 0%, #7c3aed 25%, #6366f1 50%, #a78bfa 75%, #fff 100%);
-    opacity: 0.18;
+    opacity: 0.10;
     z-index: 0;
-    filter: blur(8px);
+    filter: blur(10px);
     pointer-events: none;
-    animation: contactBoxBorder 6s linear infinite;
+    animation: contactBoxBorder 28s linear infinite;
 }
 
 @keyframes contactBoxBorder {
     0% {
-        filter: blur(8px) hue-rotate(0deg);
+        filter: blur(10px) hue-rotate(0deg);
     }
 
     100% {
-        filter: blur(8px) hue-rotate(360deg);
+        filter: blur(10px) hue-rotate(360deg);
     }
 }
 
