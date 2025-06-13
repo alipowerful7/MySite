@@ -143,7 +143,8 @@ body {
     transform: rotateY(180deg);
 }
 
-.skill-card-front, .skill-card-back {
+.skill-card-front,
+.skill-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -194,7 +195,7 @@ body {
     direction: rtl;
 }
 
-.skill-card-back > * {
+.skill-card-back>* {
     /* چرخش معکوس محتوا تا متن درست نمایش داده شود */
     transform: rotateY(180deg);
 }
@@ -307,7 +308,7 @@ body {
         -moz-transform: translateY(60px) scale(0.7) rotate(8deg);
         -ms-transform: translateY(60px) scale(0.7) rotate(8deg);
         -o-transform: translateY(60px) scale(0.7) rotate(8deg);
-}
+    }
 
     60% {
         opacity: 1;
@@ -317,7 +318,7 @@ body {
         -moz-transform: translateY(-8px) scale(1.08) rotate(-2deg);
         -ms-transform: translateY(-8px) scale(1.08) rotate(-2deg);
         -o-transform: translateY(-8px) scale(1.08) rotate(-2deg);
-}
+    }
 
     100% {
         opacity: 1;
@@ -327,7 +328,7 @@ body {
         -moz-transform: translateY(0) scale(1) rotate(0deg);
         -ms-transform: translateY(0) scale(1) rotate(0deg);
         -o-transform: translateY(0) scale(1) rotate(0deg);
-}
+    }
 }
 
 .contact-card .contact-icon {
@@ -475,6 +476,82 @@ body {
     }
 }
 
+.contact-box-effect {
+    position: relative;
+    overflow: visible;
+    background: linear-gradient(120deg, #312e81cc 60%, #7c3aedcc 100%);
+    border-radius: 2rem;
+    box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
+    animation: contactBoxGlow 3.5s cubic-bezier(.77, 0, .18, 1) infinite alternate;
+    z-index: 2;
+}
+
+@keyframes contactBoxGlow {
+    0% {
+        box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
+        filter: brightness(1.05) drop-shadow(0 0 0px #a78bfa);
+    }
+
+    50% {
+        box-shadow: 0 0 96px 32px #a78bfa99, 0 0 0 16px #fff4, 0 8px 48px #a78bfa44;
+        filter: brightness(1.18) drop-shadow(0 0 32px #a78bfa);
+    }
+
+    100% {
+        box-shadow: 0 0 64px 16px #a78bfa55, 0 0 0 8px #fff2, 0 8px 32px #0008;
+        filter: brightness(1.05) drop-shadow(0 0 0px #a78bfa);
+    }
+}
+
+.contact-box-effect::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 2.2rem;
+    background: conic-gradient(from 180deg at 50% 50%, #a78bfa 0%, #7c3aed 25%, #6366f1 50%, #a78bfa 75%, #fff 100%);
+    opacity: 0.18;
+    z-index: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    animation: contactBoxBorder 6s linear infinite;
+}
+
+@keyframes contactBoxBorder {
+    0% {
+        filter: blur(8px) hue-rotate(0deg);
+    }
+
+    100% {
+        filter: blur(8px) hue-rotate(360deg);
+    }
+}
+
+.contact-box-effect .contact-box-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-box-effect .contact-box-inner h2 {
+    background: linear-gradient(90deg, #a78bfa 0%, #6366f1 60%, #d946ef 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    filter: drop-shadow(0 2px 16px #a78bfa88);
+    font-weight: bold;
+}
+
+.contact-box-effect .contact-box-inner .contact-box-desc {
+    font-size: 1.18rem;
+    color: #fff;
+    text-shadow: 0 2px 12px #a78bfa55, 0 0 8px #fff2;
+    margin-bottom: 2.5rem;
+    margin-top: 0.5rem;
+    line-height: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
 @media (max-width: 768px) {
     .profile-avatar {
         width: 5.5rem;
@@ -484,5 +561,13 @@ body {
     .avatar-glow {
         width: 7rem;
         height: 7rem;
+    }
+
+    .contact-box-effect {
+        border-radius: 1.2rem;
+    }
+
+    .contact-box-effect::before {
+        border-radius: 1.3rem;
     }
 }
