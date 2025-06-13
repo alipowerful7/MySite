@@ -750,6 +750,13 @@ body {
 
 /* Mobile (max-width: 600px) */
 @media (max-width: 600px) {
+    #skills {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.7rem !important;
+    }
+
     .timeline-container {
         gap: 2.2rem;
         padding: 1rem 0;
@@ -781,11 +788,16 @@ body {
 
     .skill-card,
     .contact-card {
-        width: 98vw !important;
-        min-width: 0 !important;
+        flex: 0 0 48% !important;
+        max-width: 48% !important;
+        min-width: 120px !important;
+        aspect-ratio: 1/1 !important;
+        margin: 0.3rem 0 !important;
         height: auto !important;
-        padding: 0.7rem 0.2rem !important;
-        font-size: 0.95rem !important;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+        display: flex;
     }
 
     .skill-card .skill-icon {
@@ -817,6 +829,10 @@ body {
 
 /* Smallest Devices (max-width: 400px) */
 @media (max-width: 400px) {
+    #skills {
+        gap: 0.2rem !important;
+    }
+
     .timeline-content,
     .skill-card,
     .contact-card {
@@ -833,6 +849,23 @@ body {
     .resume-download-btn {
         font-size: 0.8rem;
         padding: 0.3rem 0.5rem;
+    }
+
+    .skill-card {
+        aspect-ratio: 1/1 !important;
+        width: 80vw !important;
+        min-width: 70px !important;
+        max-width: 110px !important;
+        min-height: 70px !important;
+        max-height: 110px !important;
+        height: auto !important;
+        margin: 0.1rem !important;
+        padding: 0.2rem 0.05rem !important;
+        box-sizing: border-box;
+        flex: 0 0 auto !important;
+        align-items: center;
+        justify-content: center;
+        display: flex;
     }
 }
 
@@ -986,11 +1019,59 @@ body.no-scroll {
 }
 
 @media (max-width: 600px) {
-    .skill-card.fullscreen {
-        width: 98vw !important;
-        height: 70vh !important;
-        max-width: 98vw !important;
-        max-height: 80vh !important;
-        padding: 0 !important;
+    .skill-card {
+        aspect-ratio: 1/1 !important;
+        width: 44vw !important;
+        min-width: 110px !important;
+        max-width: 160px !important;
+        min-height: 110px !important;
+        max-height: 160px !important;
+        height: auto !important;
+        margin: 0.2rem !important;
+        padding: 0.5rem 0.1rem !important;
+        box-sizing: border-box;
+        flex: 0 0 auto !important;
+        align-items: center;
+        justify-content: center;
+        display: flex;
     }
+}
+@media (max-width: 400px) {
+    .skill-card {
+        aspect-ratio: 1/1 !important;
+        width: 80vw !important;
+        min-width: 70px !important;
+        max-width: 110px !important;
+        min-height: 70px !important;
+        max-height: 110px !important;
+        height: auto !important;
+        margin: 0.1rem !important;
+        padding: 0.2rem 0.05rem !important;
+        box-sizing: border-box;
+        flex: 0 0 auto !important;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  #skills {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+  .skill-card {
+    flex: 0 0 31% !important;
+    max-width: 31% !important;
+    min-width: 150px !important;
+    aspect-ratio: 1/1 !important;
+    margin: 0.5rem 0 !important;
+    height: auto !important;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
 }
