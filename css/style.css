@@ -826,3 +826,113 @@ button:active,
         will-change: opacity, transform, filter;
     }
 }
+
+/* استایل‌های flip سه‌بعدی، fullscreen، overlay، دکمه بستن و ساختار front/back کارت مهارت */
+.skill-card {
+    perspective: 1200px;
+}
+
+.skill-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    transform-style: preserve-3d;
+    z-index: 1;
+}
+.skill-card.flipped .skill-card-inner {
+    transform: rotateY(180deg);
+}
+.skill-card-front, .skill-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    padding: 2rem;
+}
+.skill-card-front {
+    z-index: 2;
+}
+.skill-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(120deg, #7c3aed 0%, #312e81 100%);
+    color: #fff;
+    z-index: 3;
+    box-shadow: 0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2;
+}
+
+.skill-card.fullscreen {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    z-index: 1002 !important;
+    width: 90vw !important;
+    height: 80vh !important;
+    max-width: 420px !important;
+    max-height: 520px !important;
+    transform: translate(-50%, -50%) !important;
+    box-shadow: 0 0 128px 32px #a78bfaee, 0 0 0 16px #fff2;
+    transition: all 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    cursor: default;
+}
+
+.skill-card-blur-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 27, 75, 0.65);
+    backdrop-filter: blur(6px) brightness(0.8);
+    z-index: 1001;
+    transition: opacity 0.4s;
+    opacity: 1;
+    pointer-events: all;
+}
+.skill-card-blur-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skill-card-close-btn {
+    position: absolute;
+    top: 1.1rem;
+    left: 1.1rem;
+    z-index: 1100;
+    background: #fff;
+    color: #7c3aed;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 0 16px #a78bfa55;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.skill-card-close-btn:hover {
+    background: #7c3aed;
+    color: #fff;
+    box-shadow: 0 0 32px #a78bfaee;
+}
+
+body.no-scroll {
+    overflow: hidden !important;
+}
+
+@media (max-width: 600px) {
+    .skill-card.fullscreen {
+        width: 98vw !important;
+        height: 70vh !important;
+        max-width: 98vw !important;
+        max-height: 80vh !important;
+        padding: 0 !important;
+    }
+}

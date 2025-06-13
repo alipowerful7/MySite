@@ -52,6 +52,7 @@ const skillsElem = document.getElementById('skills');
 skillsElem.innerHTML = '';
 
 skills.forEach(function (skill, i) {
+    // ساختار کارت مهارت با front/back و overlay
     var card = document.createElement('div');
     card.className = 'skill-card flex flex-col items-center justify-center';
     card.style.animationDelay = (i * 0.13) + 's';
@@ -59,7 +60,15 @@ skills.forEach(function (skill, i) {
     card.style.backdropFilter = 'blur(10px)';
     card.style.borderRadius = '1.5rem';
     card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
+    card.tabIndex = 0;
 
+    // ساختار داخلی کارت (front/back)
+    var cardInner = document.createElement('div');
+    cardInner.className = 'skill-card-inner';
+
+    // front
+    var cardFront = document.createElement('div');
+    cardFront.className = 'skill-card-front flex flex-col items-center justify-center';
     // آیکون
     var icon;
     if (skillIcons[skill.name]) {
@@ -67,21 +76,99 @@ skills.forEach(function (skill, i) {
         icon.src = skillIcons[skill.name];
         icon.alt = skill.name + ' icon';
         icon.className = 'skill-icon';
-        // حذف سایزدهی دستی
     } else {
         icon = document.createElement('i');
         icon.className = 'skill-icon ' + skill.icon;
         icon.style.color = skill.color;
     }
-    card.appendChild(icon);
+    cardFront.appendChild(icon);
     // نام مهارت
     var label = document.createElement('span');
     label.className = 'mt-4 text-xl';
     label.textContent = skill.name;
-    card.appendChild(label);
+    cardFront.appendChild(label);
 
-    // افکت هاور شبیه دکمه رزومه و کارت ارتباط
+    // back
+    var cardBack = document.createElement('div');
+    cardBack.className = 'skill-card-back flex flex-col items-center justify-center';
+    var backTitle = document.createElement('span');
+    backTitle.className = 'text-xl font-bold mb-2';
+    backTitle.textContent = skill.name;
+    cardBack.appendChild(backTitle);
+    var backDesc = document.createElement('span');
+    backDesc.className = 'text-base opacity-80';
+    backDesc.textContent = 'توضیح کوتاه درباره مهارت ' + skill.name;
+    cardBack.appendChild(backDesc);
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+
+    // overlay برای fullscreen
+    var overlay = document.createElement('div');
+    overlay.className = 'skill-card-blur-overlay hide';
+    document.body.appendChild(overlay);
+
+    // دکمه بستن
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'skill-card-close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.title = 'بستن';
+    card.appendChild(closeBtn);
+    closeBtn.style.display = 'none';
+
+    // منطق flip و fullscreen
+    let isFlipped = false;
+    let isFullscreen = false;
+    function openFullscreen() {
+        if (isFullscreen) return;
+        isFullscreen = true;
+        // کارت را به انتهای body منتقل کن تا بالای overlay باشد
+        document.body.appendChild(card);
+        card.classList.add('fullscreen');
+        overlay.classList.remove('hide');
+        closeBtn.style.display = 'block';
+        document.body.classList.add('no-scroll');
+        setTimeout(() => card.classList.add('flipped'), 10);
+    }
+    function closeFullscreen() {
+        if (!isFullscreen) return;
+        isFullscreen = false;
+        card.classList.remove('flipped');
+        setTimeout(() => {
+            card.classList.remove('fullscreen');
+            overlay.classList.add('hide');
+            closeBtn.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+            // کارت را به کانتینر skills برگردان
+            skillsElem.appendChild(card);
+        }, 400);
+    }
+    card.addEventListener('click', function (e) {
+        if (isFullscreen) return;
+        openFullscreen();
+        e.stopPropagation();
+    });
+    closeBtn.addEventListener('click', function (e) {
+        closeFullscreen();
+        e.stopPropagation();
+    });
+    overlay.addEventListener('click', function () {
+        closeFullscreen();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (isFullscreen && (e.key === 'Escape' || e.key === 'Esc')) {
+            closeFullscreen();
+        }
+    });
+    // جلوگیری از کلیک ناخواسته روی کارت در حالت fullscreen
+    cardInner.addEventListener('click', function (e) {
+        if (isFullscreen) e.stopPropagation();
+    });
+
+    // افکت هاور فقط زمانی که کارت در fullscreen نیست
     card.addEventListener('mouseenter', function () {
+        if (isFullscreen) return;
         card.style.background = 'linear-gradient(120deg, #7c3aed 0%, #312e81 100%)';
         card.style.boxShadow = '0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2';
         card.style.transform = 'scale(1.13) rotate(-3deg) translateY(-10px)';
@@ -92,6 +179,7 @@ skills.forEach(function (skill, i) {
         label.style.textShadow = '0 2px 16px #a78bfa, 0 0 8px #fff';
     });
     card.addEventListener('mouseleave', function () {
+        if (isFullscreen) return;
         card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
         card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
         card.style.transform = '';
