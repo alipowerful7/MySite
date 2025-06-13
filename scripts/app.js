@@ -120,10 +120,12 @@ skills.forEach(function (skill, i) {
     // منطق flip و fullscreen
     let isFlipped = false;
     let isFullscreen = false;
+    let cardNextSibling = null;
     function openFullscreen() {
         if (isFullscreen) return;
         isFullscreen = true;
-        // کارت را به انتهای body منتقل کن تا بالای overlay باشد
+        // جایگاه بعدی کارت را ذخیره کن
+        cardNextSibling = card.nextSibling;
         document.body.appendChild(card);
         card.classList.add('fullscreen');
         overlay.classList.remove('hide');
@@ -140,8 +142,12 @@ skills.forEach(function (skill, i) {
             overlay.classList.add('hide');
             closeBtn.style.display = 'none';
             document.body.classList.remove('no-scroll');
-            // کارت را به کانتینر skills برگردان
-            skillsElem.appendChild(card);
+            // کارت را به جای قبلی خود برگردان
+            if (cardNextSibling && cardNextSibling.parentNode === skillsElem) {
+                skillsElem.insertBefore(card, cardNextSibling);
+            } else {
+                skillsElem.appendChild(card);
+            }
         }, 400);
     }
     card.addEventListener('click', function (e) {
