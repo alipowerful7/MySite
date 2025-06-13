@@ -14,7 +14,7 @@ body {
     height: unset;
     display: unset;
     /* حذف display: block و height: auto */
-    transition: background 1.2s cubic-bezier(.77,0,.18,1);
+    transition: background 1.2s cubic-bezier(.77, 0, .18, 1);
 }
 
 @keyframes galaxyGradientMove {
@@ -722,21 +722,170 @@ body {
     border-color: #d946ef55;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1800px) {
+
+    .main,
     .timeline-container {
-        padding: 1rem 0;
-        gap: 2.2rem;
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1400px) {
+
+    .main,
+    .timeline-container {
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .main,
+    .timeline-container {
+        max-width: 98vw;
     }
 
     .timeline-content {
-        padding: 1.1rem 1.2rem 1.1rem 1rem;
+        max-width: 98vw;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .main,
+    .timeline-container {
+        max-width: 100vw;
+        padding: 0 0.5rem;
+    }
+
+    .timeline-content {
+        width: 95% !important;
+        min-width: 0;
+        max-width: 100%;
         font-size: 0.98rem;
+        padding: 1.1rem 0.7rem 1.1rem 0.7rem;
     }
 
     .timeline-dot {
         width: 2rem;
         height: 2rem;
         font-size: 1.1rem;
+    }
+
+    .profile-avatar {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .avatar-glow {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .timeline-container {
+        gap: 2.2rem;
+        padding: 1rem 0;
+    }
+
+    .timeline-content {
+        width: 100% !important;
+        margin: 0 !important;
+        text-align: right !important;
+        font-size: 0.93rem;
+        padding: 0.9rem 0.5rem 0.9rem 0.5rem;
+    }
+
+    .timeline-dot {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .profile-avatar {
+        width: 3.7rem;
+        height: 3.7rem;
+    }
+
+    .avatar-glow {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .skill-card,
+    .contact-card {
+        width: 95vw !important;
+        min-width: 0 !important;
+        height: auto !important;
+        padding: 1.1rem 0.5rem !important;
+        font-size: 1rem !important;
+    }
+
+    .resume-download-btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+    }
+
+    .contact-box-effect {
+        border-radius: 1.2rem;
+        padding: 1.2rem 0.5rem;
+    }
+
+    .contact-box-effect::before {
+        border-radius: 1.3rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .timeline-content,
+    .skill-card,
+    .contact-card {
+        font-size: 0.85rem !important;
+        padding: 0.5rem 0.2rem !important;
+    }
+
+    .resume-download-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+@media (min-width: 2000px) {
+
+    .main,
+    .timeline-container {
+        max-width: 1600px;
+    }
+
+    .profile-avatar {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .avatar-glow {
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .skill-card,
+    .contact-card {
+        width: 20rem !important;
+        height: 15rem !important;
+        font-size: 1.5rem !important;
+    }
+
+    .timeline-content {
+        font-size: 1.3rem;
+        padding: 2.2rem 2.5rem 2.2rem 2.5rem;
     }
 }
 
@@ -745,8 +894,9 @@ body {
     opacity: 0;
     transform: translateY(60px) scale(0.97);
     filter: blur(8px);
-    transition: opacity 1.1s cubic-bezier(.68,-0.55,.27,1.55), transform 1.1s cubic-bezier(.68,-0.55,.27,1.55), filter 1.1s;
+    transition: opacity 1.1s cubic-bezier(.68, -0.55, .27, 1.55), transform 1.1s cubic-bezier(.68, -0.55, .27, 1.55), filter 1.1s;
 }
+
 .section-fade.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -754,10 +904,18 @@ body {
 }
 
 /* --- Button hover pop effect --- */
-button, .resume-download-btn, .timeline-content, .contact-card, .skill-card {
-    transition: transform 0.35s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.35s, filter 0.35s, background 0.7s;
+button,
+.resume-download-btn,
+.timeline-content,
+.contact-card,
+.skill-card {
+    transition: transform 0.35s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.35s, filter 0.35s, background 0.7s;
 }
-button:active, .resume-download-btn:active, .contact-card:active, .skill-card:active {
+
+button:active,
+.resume-download-btn:active,
+.contact-card:active,
+.skill-card:active {
     transform: scale(0.96) !important;
     filter: brightness(0.97);
 }
@@ -766,6 +924,7 @@ button:active, .resume-download-btn:active, .contact-card:active, .skill-card:ac
 .timeline-dot {
     transition: box-shadow 0.4s, background 0.4s, filter 0.4s, color 0.4s;
 }
+
 .timeline-dot:hover {
     filter: brightness(1.3) drop-shadow(0 0 16px #fff) drop-shadow(0 0 32px #a78bfa);
     color: #fff;
