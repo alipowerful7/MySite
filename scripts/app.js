@@ -148,6 +148,15 @@ skills.forEach(function (skill, i) {
             } else {
                 skillsElem.appendChild(card);
             }
+            // ریست استایل هاور کارت و آیکون و label
+            card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
+            card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
+            card.style.transform = '';
+            card.style.filter = '';
+            icon.style.transform = '';
+            icon.style.filter = 'drop-shadow(0 0 16px #a78bfa88)';
+            label.style.color = '';
+            label.style.textShadow = '';
         }, 400);
     }
     card.addEventListener('click', function (e) {
