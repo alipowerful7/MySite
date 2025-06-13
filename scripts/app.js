@@ -51,13 +51,6 @@ const skillIcons = {
 const skillsElem = document.getElementById('skills');
 skillsElem.innerHTML = '';
 
-// ایجاد لایه بلوری برای حالت فول‌اسکرین کارت مهارت
-let blurOverlay = document.createElement('div');
-blurOverlay.className = 'skill-card-blur-overlay hide';
-document.body.appendChild(blurOverlay);
-
-let openedSkillCard = null;
-
 skills.forEach(function (skill, i) {
     var card = document.createElement('div');
     card.className = 'skill-card flex flex-col items-center justify-center';
@@ -67,13 +60,6 @@ skills.forEach(function (skill, i) {
     card.style.borderRadius = '1.5rem';
     card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
 
-    // ساختار داخلی کارت برای flip
-    var cardInner = document.createElement('div');
-    cardInner.className = 'skill-card-inner';
-
-    // سمت جلو کارت
-    var cardFront = document.createElement('div');
-    cardFront.className = 'skill-card-front';
     // آیکون
     var icon;
     if (skillIcons[skill.name]) {
@@ -81,87 +67,21 @@ skills.forEach(function (skill, i) {
         icon.src = skillIcons[skill.name];
         icon.alt = skill.name + ' icon';
         icon.className = 'skill-icon';
-        icon.style.background = 'none';
-        icon.style.width = '4rem';
-        icon.style.height = '4rem';
-        icon.style.objectFit = 'contain';
-        icon.style.marginBottom = '1.1rem';
-        icon.style.filter = 'drop-shadow(0 0 16px #a78bfa88)';
+        // حذف سایزدهی دستی
     } else {
         icon = document.createElement('i');
         icon.className = 'skill-icon ' + skill.icon;
         icon.style.color = skill.color;
     }
-    cardFront.appendChild(icon);
+    card.appendChild(icon);
     // نام مهارت
     var label = document.createElement('span');
     label.className = 'mt-4 text-xl';
     label.textContent = skill.name;
-    cardFront.appendChild(label);
-
-    // سمت پشت کارت
-    var cardBack = document.createElement('div');
-    cardBack.className = 'skill-card-back';
-    let backText = '';
-    switch (skill.name) {
-        case 'C#':
-            backText = `
-                <b>C#</b> زبان اصلی من برای توسعه بک‌اند است. با این زبان پروژه‌هایی مثل <a href="https://github.com/alipowerful7/TaskManager" target="_blank">مدیریت تسک</a>، <a href="https://github.com/alipowerful7/Blogify" target="_blank">وبلاگ با خرید اشتراک</a> و <a href="https://github.com/alipowerful7/Commentino" target="_blank">کامنتینو</a> را توسعه داده‌ام. عاشق قدرت و انعطاف این زبان هستم!
-            `;
-            break;
-        case 'Asp.Net':
-            backText = `
-                <b>Asp.Net</b> فریم‌ورک محبوب من برای ساخت API و وب‌اپلیکیشن‌های مقیاس‌پذیر است. نمونه کارها: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager</a>، <a href="https://github.com/alipowerful7/Blogify" target="_blank">Blogify</a> و <a href="https://github.com/alipowerful7/Commentino" target="_blank">Commentino</a>.<br>با معماری تمیز و امنیت بالا، پروژه‌هایم را توسعه می‌دهم.
-            `;
-            break;
-        case 'Git':
-            backText = `
-                <b>Git</b> ابزار جدانشدنی من برای کنترل نسخه است. هر پروژه‌ای را با گیت مدیریت می‌کنم و عاشق شاخه‌بندی و همکاری تیمی هستم. نمونه کار: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager</a>.
-            `;
-            break;
-        case 'Github':
-            backText = `
-                <b>Github</b> خانه پروژه‌های من است! کدهایم را اینجا به اشتراک می‌گذارم و از Pull Request و Issue برای توسعه بهتر استفاده می‌کنم.
-            `;
-            break;
-        case 'Gitlab':
-            backText = `
-                <b>Gitlab</b> را برای پروژه‌های خصوصی و CI/CD حرفه‌ای انتخاب می‌کنم. تجربه کار با Gitlab CI و مدیریت پروژه‌های گروهی را دارم.
-            `;
-            break;
-        case 'Docker':
-            backText = `
-                <b>Docker</b> را برای دپلوی سریع و ایزوله‌سازی محیط پروژه‌هایم استفاده می‌کنم. عاشق ساخت ایمیج‌های سفارشی و اجرای سرویس‌ها در کانتینر هستم. نمونه: <a href="https://github.com/alipowerful7/Commentino" target="_blank">Commentino Dockerized</a>
-            `;
-            break;
-        case 'Postman':
-            backText = `
-                <b>Postman</b> ابزار مورد علاقه من برای تست و مستندسازی APIهاست. هر API جدیدی را با پست‌من تست می‌کنم و کالکشن‌های حرفه‌ای می‌سازم تا تیمم راحت‌تر تست کند.
-            `;
-            break;
-        case 'Sql Server':
-            backText = `
-                <b>SQL Server</b> پایگاه داده‌ای است که برای پروژه‌های سازمانی و بزرگ استفاده می‌کنم. با طراحی جداول، کوئری‌های پیچیده و بهینه‌سازی عملکرد آشنایی کامل دارم. نمونه: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager DB</a>
-            `;
-            break;
-        case 'Postgresql':
-            backText = `
-                <b>PostgreSQL</b> را برای پروژه‌های متن‌باز و مقیاس‌پذیر انتخاب می‌کنم. تجربه کار با JSONB، توابع پیشرفته و توسعه APIهای سریع با این دیتابیس را دارم.
-            `;
-            break;
-        default:
-            backText = `تجربه و علاقه من به این مهارت باعث شده پروژه‌های جذابی بسازم!`;
-    }
-    cardBack.innerHTML = `<button class="skill-card-close" title="بستن">&times;</button><div style="margin-top:2.5rem;">${backText}</div>`;
-
-    // اضافه کردن ساختار flip
-    cardInner.appendChild(cardFront);
-    cardInner.appendChild(cardBack);
-    card.appendChild(cardInner);
+    card.appendChild(label);
 
     // افکت هاور شبیه دکمه رزومه و کارت ارتباط
     card.addEventListener('mouseenter', function () {
-        if (card.classList.contains('flipped')) return;
         card.style.background = 'linear-gradient(120deg, #7c3aed 0%, #312e81 100%)';
         card.style.boxShadow = '0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2';
         card.style.transform = 'scale(1.13) rotate(-3deg) translateY(-10px)';
@@ -172,7 +92,6 @@ skills.forEach(function (skill, i) {
         label.style.textShadow = '0 2px 16px #a78bfa, 0 0 8px #fff';
     });
     card.addEventListener('mouseleave', function () {
-        if (card.classList.contains('flipped')) return;
         card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
         card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
         card.style.transform = '';
@@ -183,49 +102,8 @@ skills.forEach(function (skill, i) {
         label.style.textShadow = '';
     });
 
-    // کلیک برای flip و فول‌اسکرین
-    card.addEventListener('click', function (e) {
-        if (card.classList.contains('flipped')) return;
-        if (openedSkillCard) return;
-        card.classList.add('flipped');
-        blurOverlay.classList.remove('hide');
-        openedSkillCard = card;
-        document.body.style.overflow = 'hidden';
-    });
-
-    // دکمه بستن پشت کارت
-    cardBack.querySelector('.skill-card-close').addEventListener('click', function (e) {
-        e.stopPropagation();
-        card.classList.remove('flipped');
-        // تا پایان انیمیشن flip، محتوای کارت جلو را مخفی کن
-        cardInner.style.visibility = 'hidden';
-        blurOverlay.classList.add('hide');
-        openedSkillCard = null;
-        document.body.style.overflow = '';
-        setTimeout(function () {
-            cardInner.style.visibility = '';
-        }, 700); // مدت زمان flip در CSS
-    });
-
     skillsElem.appendChild(card);
 });
-
-// کلیک روی لایه بلوری برای بستن کارت
-// این بخش حذف یا غیرفعال می‌شود تا فقط با ضربدر کارت بسته شود
-// blurOverlay.addEventListener('click', function () {
-//     if (openedSkillCard) {
-//         openedSkillCard.classList.remove('flipped');
-//         // تا پایان انیمیشن flip، محتوای کارت جلو را مخفی کن (مثل ضربدر)
-//         var cardInner = openedSkillCard.querySelector('.skill-card-inner');
-//         if (cardInner) cardInner.style.visibility = 'hidden';
-//         blurOverlay.classList.add('hide');
-//         document.body.style.overflow = '';
-//         setTimeout(function () {
-//             if (cardInner) cardInner.style.visibility = '';
-//             openedSkillCard = null;
-//         }, 700); // مدت زمان flip در CSS
-//     }
-// });
 
 // ستاره‌های پس‌زمینه کهکشانی متحرک با حرکت بسیار نرم و روان و بدون لگ
 let lastStarFrame = 0;
