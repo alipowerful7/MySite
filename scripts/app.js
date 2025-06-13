@@ -339,3 +339,17 @@ starAnimationFrameId = requestAnimationFrame(animateStars);
         }
     });
 })();
+
+// انیمیشن fade-in بخش‌ها هنگام اسکرول
+function revealSectionsOnScroll() {
+    const sections = document.querySelectorAll('.section-fade');
+    const trigger = window.innerHeight * 0.92;
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < trigger) {
+            section.classList.add('visible');
+        }
+    });
+}
+window.addEventListener('scroll', revealSectionsOnScroll);
+window.addEventListener('DOMContentLoaded', revealSectionsOnScroll);
