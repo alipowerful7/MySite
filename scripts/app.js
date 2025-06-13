@@ -147,9 +147,14 @@ skills.forEach(function (skill, i) {
     cardBack.querySelector('.skill-card-close').addEventListener('click', function (e) {
         e.stopPropagation();
         card.classList.remove('flipped');
+        // تا پایان انیمیشن flip، محتوای کارت جلو را مخفی کن
+        cardInner.style.visibility = 'hidden';
         blurOverlay.classList.add('hide');
         openedSkillCard = null;
         document.body.style.overflow = '';
+        setTimeout(function () {
+            cardInner.style.visibility = '';
+        }, 700); // مدت زمان flip در CSS
     });
 
     skillsElem.appendChild(card);
