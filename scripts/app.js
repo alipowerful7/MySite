@@ -51,6 +51,13 @@ const skillIcons = {
 const skillsElem = document.getElementById('skills');
 skillsElem.innerHTML = '';
 
+// ایجاد لایه بلوری برای حالت فول‌اسکرین کارت مهارت
+let blurOverlay = document.createElement('div');
+blurOverlay.className = 'skill-card-blur-overlay hide';
+document.body.appendChild(blurOverlay);
+
+let openedSkillCard = null;
+
 skills.forEach(function (skill, i) {
     var card = document.createElement('div');
     card.className = 'skill-card flex flex-col items-center justify-center';
@@ -59,6 +66,14 @@ skills.forEach(function (skill, i) {
     card.style.backdropFilter = 'blur(10px)';
     card.style.borderRadius = '1.5rem';
     card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
+
+    // ساختار داخلی کارت برای flip
+    var cardInner = document.createElement('div');
+    cardInner.className = 'skill-card-inner';
+
+    // سمت جلو کارت
+    var cardFront = document.createElement('div');
+    cardFront.className = 'skill-card-front';
     // آیکون
     var icon;
     if (skillIcons[skill.name]) {
@@ -77,14 +92,26 @@ skills.forEach(function (skill, i) {
         icon.className = 'skill-icon ' + skill.icon;
         icon.style.color = skill.color;
     }
-    card.appendChild(icon);
+    cardFront.appendChild(icon);
     // نام مهارت
     var label = document.createElement('span');
     label.className = 'mt-4 text-xl';
     label.textContent = skill.name;
-    card.appendChild(label);
+    cardFront.appendChild(label);
+
+    // سمت پشت کارت
+    var cardBack = document.createElement('div');
+    cardBack.className = 'skill-card-back';
+    cardBack.innerHTML = '<button class="skill-card-close" title="بستن">&times;</button><div style="margin-top:2.5rem;">متن تستی برای پشت کارت مهارت <b>' + skill.name + '</b></div>';
+
+    // اضافه کردن ساختار flip
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+
     // افکت هاور شبیه دکمه رزومه و کارت ارتباط
     card.addEventListener('mouseenter', function () {
+        if (card.classList.contains('flipped')) return;
         card.style.background = 'linear-gradient(120deg, #7c3aed 0%, #312e81 100%)';
         card.style.boxShadow = '0 0 64px 24px #a78bfaee, 0 0 0 8px #fff2';
         card.style.transform = 'scale(1.13) rotate(-3deg) translateY(-10px)';
@@ -95,6 +122,7 @@ skills.forEach(function (skill, i) {
         label.style.textShadow = '0 2px 16px #a78bfa, 0 0 8px #fff';
     });
     card.addEventListener('mouseleave', function () {
+        if (card.classList.contains('flipped')) return;
         card.style.background = 'linear-gradient(135deg, #312e81cc 60%, #7c3aedcc 100%)';
         card.style.boxShadow = '0 0 32px 8px #a78bfa33, 0 2px 16px #0008';
         card.style.transform = '';
@@ -104,7 +132,37 @@ skills.forEach(function (skill, i) {
         label.style.color = '';
         label.style.textShadow = '';
     });
+
+    // کلیک برای flip و فول‌اسکرین
+    card.addEventListener('click', function (e) {
+        if (card.classList.contains('flipped')) return;
+        if (openedSkillCard) return;
+        card.classList.add('flipped');
+        blurOverlay.classList.remove('hide');
+        openedSkillCard = card;
+        document.body.style.overflow = 'hidden';
+    });
+
+    // دکمه بستن پشت کارت
+    cardBack.querySelector('.skill-card-close').addEventListener('click', function (e) {
+        e.stopPropagation();
+        card.classList.remove('flipped');
+        blurOverlay.classList.add('hide');
+        openedSkillCard = null;
+        document.body.style.overflow = '';
+    });
+
     skillsElem.appendChild(card);
+});
+
+// کلیک روی لایه بلوری برای بستن کارت
+blurOverlay.addEventListener('click', function () {
+    if (openedSkillCard) {
+        openedSkillCard.classList.remove('flipped');
+        blurOverlay.classList.add('hide');
+        openedSkillCard = null;
+        document.body.style.overflow = '';
+    }
 });
 
 // ستاره‌های پس‌زمینه کهکشانی متحرک با حرکت بسیار نرم و روان و بدون لگ
