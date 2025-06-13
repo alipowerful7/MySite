@@ -102,7 +102,57 @@ skills.forEach(function (skill, i) {
     // سمت پشت کارت
     var cardBack = document.createElement('div');
     cardBack.className = 'skill-card-back';
-    cardBack.innerHTML = '<button class="skill-card-close" title="بستن">&times;</button><div style="margin-top:2.5rem;">متن تستی برای پشت کارت مهارت <b>' + skill.name + '</b></div>';
+    let backText = '';
+    switch (skill.name) {
+        case 'C#':
+            backText = `
+                <b>C#</b> زبان اصلی من برای توسعه بک‌اند است. با این زبان پروژه‌هایی مثل <a href="https://github.com/alipowerful7/TaskManager" target="_blank">مدیریت تسک</a>، <a href="https://github.com/alipowerful7/Blogify" target="_blank">وبلاگ با خرید اشتراک</a> و <a href="https://github.com/alipowerful7/Commentino" target="_blank">کامنتینو</a> را توسعه داده‌ام. عاشق قدرت و انعطاف این زبان هستم!
+            `;
+            break;
+        case 'Asp.Net':
+            backText = `
+                <b>Asp.Net</b> فریم‌ورک محبوب من برای ساخت API و وب‌اپلیکیشن‌های مقیاس‌پذیر است. نمونه کارها: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager</a>، <a href="https://github.com/alipowerful7/Blogify" target="_blank">Blogify</a> و <a href="https://github.com/alipowerful7/Commentino" target="_blank">Commentino</a>.<br>با معماری تمیز و امنیت بالا، پروژه‌هایم را توسعه می‌دهم.
+            `;
+            break;
+        case 'Git':
+            backText = `
+                <b>Git</b> ابزار جدانشدنی من برای کنترل نسخه است. هر پروژه‌ای را با گیت مدیریت می‌کنم و عاشق شاخه‌بندی و همکاری تیمی هستم. نمونه کار: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager</a>.
+            `;
+            break;
+        case 'Github':
+            backText = `
+                <b>Github</b> خانه پروژه‌های من است! کدهایم را اینجا به اشتراک می‌گذارم و از Pull Request و Issue برای توسعه بهتر استفاده می‌کنم.
+            `;
+            break;
+        case 'Gitlab':
+            backText = `
+                <b>Gitlab</b> را برای پروژه‌های خصوصی و CI/CD حرفه‌ای انتخاب می‌کنم. تجربه کار با Gitlab CI و مدیریت پروژه‌های گروهی را دارم.
+            `;
+            break;
+        case 'Docker':
+            backText = `
+                <b>Docker</b> را برای دپلوی سریع و ایزوله‌سازی محیط پروژه‌هایم استفاده می‌کنم. عاشق ساخت ایمیج‌های سفارشی و اجرای سرویس‌ها در کانتینر هستم. نمونه: <a href="https://github.com/alipowerful7/Commentino" target="_blank">Commentino Dockerized</a>
+            `;
+            break;
+        case 'Postman':
+            backText = `
+                <b>Postman</b> ابزار مورد علاقه من برای تست و مستندسازی APIهاست. هر API جدیدی را با پست‌من تست می‌کنم و کالکشن‌های حرفه‌ای می‌سازم تا تیمم راحت‌تر تست کند.
+            `;
+            break;
+        case 'Sql Server':
+            backText = `
+                <b>SQL Server</b> پایگاه داده‌ای است که برای پروژه‌های سازمانی و بزرگ استفاده می‌کنم. با طراحی جداول، کوئری‌های پیچیده و بهینه‌سازی عملکرد آشنایی کامل دارم. نمونه: <a href="https://github.com/alipowerful7/TaskManager" target="_blank">TaskManager DB</a>
+            `;
+            break;
+        case 'Postgresql':
+            backText = `
+                <b>PostgreSQL</b> را برای پروژه‌های متن‌باز و مقیاس‌پذیر انتخاب می‌کنم. تجربه کار با JSONB، توابع پیشرفته و توسعه APIهای سریع با این دیتابیس را دارم.
+            `;
+            break;
+        default:
+            backText = `تجربه و علاقه من به این مهارت باعث شده پروژه‌های جذابی بسازم!`;
+    }
+    cardBack.innerHTML = `<button class="skill-card-close" title="بستن">&times;</button><div style="margin-top:2.5rem;">${backText}</div>`;
 
     // اضافه کردن ساختار flip
     cardInner.appendChild(cardFront);
