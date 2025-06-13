@@ -365,3 +365,39 @@ function revealSectionsOnScroll() {
 }
 window.addEventListener('scroll', revealSectionsOnScroll);
 window.addEventListener('DOMContentLoaded', revealSectionsOnScroll);
+
+// Scroll reveal animation for sections
+const revealElements = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 80) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+// Back to top button
+const backToTopBtn = document.createElement('button');
+backToTopBtn.id = 'backToTop';
+backToTopBtn.title = 'بازگشت به بالا';
+backToTopBtn.innerHTML = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="url(#paint0_linear)"/><path d="M16 22V10M16 10L10 16M16 10L22 16" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#00C6FB"/><stop offset="1" stop-color="#005BEA"/></linearGradient></defs></svg>`;
+document.body.appendChild(backToTopBtn);
+
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add('show');
+  } else {
+    backToTopBtn.classList.remove('show');
+  }
+});

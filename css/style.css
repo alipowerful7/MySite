@@ -1093,3 +1093,47 @@ body.no-scroll {
         margin-right: -15px;
     }
 }
+
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: all 0.7s cubic-bezier(.23,1.02,.32,1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* Back to top button styles */
+#backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(.23,1.02,.32,1), transform 0.4s cubic-bezier(.23,1.02,.32,1);
+  transform: scale(0.8);
+  box-shadow: 0 8px 32px rgba(0, 198, 251, 0.18), 0 1.5px 8px rgba(0,91,234,0.10);
+}
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+#backToTop svg {
+  display: block;
+  filter: drop-shadow(0 2px 8px #00c6fb44);
+  transition: filter 0.3s;
+}
+#backToTop:hover svg {
+  filter: drop-shadow(0 4px 16px #005bea88) brightness(1.2);
+}
+#backToTop:active svg {
+  filter: drop-shadow(0 2px 8px #005bea88) brightness(0.95);
+}
