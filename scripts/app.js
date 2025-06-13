@@ -97,7 +97,38 @@ skills.forEach(function (skill, i) {
     cardBack.appendChild(backTitle);
     var backDesc = document.createElement('span');
     backDesc.className = 'text-base opacity-80';
-    backDesc.textContent = 'توضیح کوتاه درباره مهارت ' + skill.name;
+    // توضیحات واقعی برای هر مهارت
+    switch (skill.name) {
+        case 'C#':
+            backDesc.textContent = 'تجربه حرفه‌ای در توسعه اپلیکیشن‌های بک‌اند و پروژه‌های واقعی با C# و معماری لایه‌ای.';
+            break;
+        case 'Asp.Net':
+            backDesc.textContent = 'پیاده‌سازی و توسعه وب‌سرویس‌ها و APIهای RESTful با ASP.NET Core و MVC در پروژه‌های مختلف.';
+            break;
+        case 'Git':
+            backDesc.textContent = 'مدیریت نسخه و همکاری تیمی حرفه‌ای با Git در پروژه‌های شخصی و تیمی.';
+            break;
+        case 'Github':
+            backDesc.textContent = 'میزبانی و مدیریت سورس‌کد پروژه‌ها، مستندسازی و انتشار پروژه‌های متن‌باز در Github.';
+            break;
+        case 'Gitlab':
+            backDesc.textContent = 'تجربه استفاده از Gitlab برای CI/CD و مدیریت پروژه‌های خصوصی و سازمانی.';
+            break;
+        case 'Docker':
+            backDesc.textContent = 'آشنایی با داکر و کانتینرسازی سرویس‌ها برای توسعه و استقرار سریع‌تر اپلیکیشن‌ها.';
+            break;
+        case 'Postman':
+            backDesc.textContent = 'تست و مستندسازی حرفه‌ای APIها و توسعه سریع‌تر بک‌اند با Postman.';
+            break;
+        case 'Sql Server':
+            backDesc.textContent = 'طراحی و مدیریت دیتابیس‌های رابطه‌ای و کوئری‌نویسی پیشرفته با SQL Server.';
+            break;
+        case 'Postgresql':
+            backDesc.textContent = 'تجربه کار با PostgreSQL در پروژه‌های بک‌اند و آشنایی با قابلیت‌های پیشرفته آن.';
+            break;
+        default:
+            backDesc.textContent = 'مهارت و تجربه عملی در این حوزه.';
+    }
     cardBack.appendChild(backDesc);
 
     cardInner.appendChild(cardFront);
@@ -253,7 +284,7 @@ function createStars(num) {
         star.style.opacity = (Math.random() * 0.7 + 0.3);
         star.style.boxShadow = '0 0 ' + (Math.random() * 12 + 4) + 'px ' + (Math.random() * 2) + 'px #fff8';
         galaxy.appendChild(star);
-        galaxyStars.push({el: star, angle, radius, cx, cy});
+        galaxyStars.push({ el: star, angle, radius, cx, cy });
     }
 }
 // تعداد ستاره‌ها را کاهش می‌دهیم تا سایت سریع‌تر شود
