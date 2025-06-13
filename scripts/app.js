@@ -161,14 +161,21 @@ skills.forEach(function (skill, i) {
 });
 
 // کلیک روی لایه بلوری برای بستن کارت
-blurOverlay.addEventListener('click', function () {
-    if (openedSkillCard) {
-        openedSkillCard.classList.remove('flipped');
-        blurOverlay.classList.add('hide');
-        openedSkillCard = null;
-        document.body.style.overflow = '';
-    }
-});
+// این بخش حذف یا غیرفعال می‌شود تا فقط با ضربدر کارت بسته شود
+// blurOverlay.addEventListener('click', function () {
+//     if (openedSkillCard) {
+//         openedSkillCard.classList.remove('flipped');
+//         // تا پایان انیمیشن flip، محتوای کارت جلو را مخفی کن (مثل ضربدر)
+//         var cardInner = openedSkillCard.querySelector('.skill-card-inner');
+//         if (cardInner) cardInner.style.visibility = 'hidden';
+//         blurOverlay.classList.add('hide');
+//         document.body.style.overflow = '';
+//         setTimeout(function () {
+//             if (cardInner) cardInner.style.visibility = '';
+//             openedSkillCard = null;
+//         }, 700); // مدت زمان flip در CSS
+//     }
+// });
 
 // ستاره‌های پس‌زمینه کهکشانی متحرک با حرکت بسیار نرم و روان و بدون لگ
 let lastStarFrame = 0;
